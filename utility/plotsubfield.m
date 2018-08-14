@@ -49,7 +49,7 @@ for ii = 1:n
 end
 
 %plot each struct's subfield on one plot
-if nargin > 3
+if nargin > 3 && ~isempty(figh)
     figure(figh)
 else
     figure;

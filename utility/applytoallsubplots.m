@@ -20,8 +20,12 @@ if nargin < 4
     end
 end
 
-if isnumeric(figh)
+if isnumeric(figh) && ~isempty(figh)
     figh = figure(figh);
+elseif isgraphics(figh)
+    figh = figure(figh);
+else
+    figh = gcf;
 end
 
 %if 
