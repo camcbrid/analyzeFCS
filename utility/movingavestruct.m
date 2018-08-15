@@ -1,5 +1,5 @@
 function movingavestruct(cellstruct,k,yfield,xfield,figh)
-
+%
 
 if nargin < 5
     figh = [];
@@ -12,7 +12,8 @@ datafields = fieldnames(cellstruct);
 meanstruct = struct;
 for ii = 1:length(datafields)
     meanstruct.(datafields{ii}).(yfield) = movmean(cellstruct.(datafields{ii}).(yfield),k);
-    meanstruct.(datafields{ii}).(xfield) = cellstruct.(datafields{ii}).(xfield);
+    meanstruct.(datafields{ii}).(xfield) = cellstruct.(datafields{ii}).(xfield)...
+        - cellstruct.(datafields{ii}).(xfield)(1);
 end
 
 plotsubfield(meanstruct,xfield,yfield,figh)

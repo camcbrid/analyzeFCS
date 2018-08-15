@@ -37,6 +37,9 @@ end
 if ~ischar(yfield)% || ~any(substructfun(@contains,cellstruct,yfield))
     error('yfield not subfield in cellstruct')
 end
+if isempty(axscale)
+    axscale = 'linear';
+end
 
 %check that each cell type has a time field
 cellprops = cell(n,1);
@@ -73,7 +76,12 @@ for jj = 1:n
     else
         %xticks([])
     end
-    xlim([min(xrng),max(xrng)])
+    if strcmp(xfield,'time')
+        xlim([min(x),max(x)])
+        xticks([min(x),max(x)])
+    else
+        xlim([min(xrng),max(xrng)])
+    end
     ylim([min(yrng),max(yrng)])
 end
 

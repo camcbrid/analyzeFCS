@@ -24,17 +24,18 @@ for ii = 1:length(filenames)
     [fcsdat, fcshdr, fcsdatscaled, fcsdat_comp] = fca_readfcs([filenames{ii},'.fcs']);
     %ignore scaling and compensation done on machine
     
+    fnameshort = strrep(strrep(strrep(filenames{ii},' ',''),'-',''),'.','_');
+    datafields = lower(strrep(strrep({fcshdr.par.name},'-',''),' ',''));
     %output as structs
-    datafields = lower(strrep({fcshdr.par.name},'-',''));
     for jj = 1:length(datafields)
         if ~isempty(fcsdat_comp)
             compflgvec(ii) = 1;
-            datastruct.(filenames{ii}).(datafields{jj}) = fcsdat_comp(:,jj);
-            datastruct2.(datafields{jj}).(filenames{ii}) = fcsdat_comp(:,jj);
+            datastruct.(fnameshort).(datafields{jj}) = fcsdat_comp(:,jj);
+            datastruct2.(datafields{jj}).(fnameshort) = fcsdat_comp(:,jj);
         else
             compflgvec(ii) = 0;
-            datastruct.(filenames{ii}).(datafields{jj}) = fcsdat(:,jj);
-            datastruct2.(datafields{jj}).(filenames{ii}) = fcsdat(:,jj);
+            datastruct.(fnameshort).(datafields{jj}) = fcsdat(:,jj);
+            datastruct2.(datafields{jj}).(fnameshort) = fcsdat(:,jj);
         end
     end
 end

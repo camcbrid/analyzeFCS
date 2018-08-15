@@ -5,6 +5,13 @@ function hatstruct = calcFPhats(cellstruct)
 %have the subfields: fl1h (GFP), fl2h (RFP), fl3h (YFP), and fl4h (RFP). It
 %is assumed that all fluorescence fields have been compensated.
 
+celltypes = fieldnames(cellstruct);
+if ~(any(contains(celltypes,'G')) && any(contains(celltypes,'R')) && ...
+        any(contains(celltypes,'GY')) && any(contains(celltypes,'GR')) && ...
+        any(contains(celltypes,'RY')))
+    error('reqired fields not present in cellstruct')
+end
+
 cellstruct = combinesubstructs(cellstruct);
 
 %init

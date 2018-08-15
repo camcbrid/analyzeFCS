@@ -1,4 +1,4 @@
-function plotcellstruct(cellstruct,datatag,xfield)
+function plotcellstruct(cellstruct,datatag,xfield,shifton)
 %null = plotcellstruct(cellstruct,datatag,xfield)
 %plot timeseries for each dataset contained labeled by the fields in 
 %cellstruct
@@ -7,10 +7,13 @@ function plotcellstruct(cellstruct,datatag,xfield)
 %xfield is a string corresponding to the name of the field used for the
 %independent variable on the plot
 
-if nargin < 3
-    xfield = 'time';
-    if nargin < 2
-        datatag = '';
+if nargin < 4
+    shifton = false;
+    if nargin < 3
+        xfield = 'time';
+        if nargin < 2
+            datatag = '';
+        end
     end
 end
 
