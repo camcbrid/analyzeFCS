@@ -1,5 +1,8 @@
-function movingavestruct(cellstruct,k,yfield,xfield,figh)
-%
+function movingavestruct(cellstruct, k, yfield, xfield, figh)
+%movingavestruct(CELLSTRUCT, K, YFIELD, XFIELD, FIGH)
+%calculate moving averate of YFIELD over XFIELD with K-point moving
+%average. Outputs plot of smoothed YFIELD vs XFIELD to the figure handle 
+%FIGH.
 
 if nargin < 5
     figh = [];
@@ -17,4 +20,4 @@ for ii = 1:length(datafields)
 end
 
 plotsubfield(meanstruct,xfield,yfield,figh)
-applytoallsubplots(figh,'axis','yscale','linear')
+setallsubplots(figh,'axis','yscale','linear')

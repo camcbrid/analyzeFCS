@@ -37,9 +37,9 @@ for ii = 1:n
     end
     x = cellstruct.(celltypes{ii}).(xfield);
     meanstruct.(celltypes{ii}).geo = geomean(x(x>0));
-    meanstruct.(celltypes{ii}).arith = mean(x(x>0));
+    %meanstruct.(celltypes{ii}).arith = mean(x(x>0));
     stdstruct.(celltypes{ii}).geo = geostd(x(x>0));
-    stdstruct.(celltypes{ii}).arith = std(x(x>0));
+    %stdstruct.(celltypes{ii}).arith = std(x(x>0));
 end
 
 %plot each struct's subfield on one plot
@@ -68,8 +68,8 @@ for jj = 1:n
             'displaystyle','stairs'); hold on
         errorbar(log10(meanstruct.(celltypes{jj}).geo),1,log10(stdstruct.(celltypes{jj}).geo),...
             'horizontal','kx')
-        errorbar(log10(meanstruct.(celltypes{jj}).arith),0.5,log10(stdstruct.(celltypes{jj}).arith),...
-            'horizontal','ko')
+        %errorbar(log10(meanstruct.(celltypes{jj}).arith),0.5,log10(stdstruct.(celltypes{jj}).arith),...
+        %    'horizontal','ko')
         if n - jj < ceil(n/m)
             xlabel(['log_{10}(',xfield,')'])
         end
@@ -93,5 +93,5 @@ temp = cell(length(datafields),1);
 for ii = 1:length(datafields)
     temp{ii} = funhandle(cellstruct.(datafields{ii}).(fieldstr));
 end
-
 output  = funhandle(cell2mat(temp));
+

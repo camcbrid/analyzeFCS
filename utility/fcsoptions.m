@@ -43,6 +43,12 @@ elseif contains(expname,'yili')
     fcsopts.time = '0 hrs';
     fcsopts.datapath = 'D:\Research\Experimental\FCS\20180815_143908_yili';
     fcsopts.platenames = struct;
+elseif contains(expname,'thirdparty')
+    fcsopts.datapath = 'D:\Research\Experimental\FCS\CFlow-FCS Exports_new\20180822_144033_third_party';
+    fcsopts.platenames = struct;
+elseif contains(expname,'exportfcs')
+    fcsopts.datapath = 'D:\Research\Experimental\FCS\CFlow-FCS Exports_new\20180822_144220_export_fcs';
+    fcsopts.platenames = struct;
 else
     error('does not match valid experiment condition')
 end

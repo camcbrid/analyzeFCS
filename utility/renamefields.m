@@ -17,7 +17,11 @@ outstruct = struct;
 
 %change each field name.
 for ii = 1:length(datafields)
-    newname = namestruct.(datafields{ii});
-    outstruct.(newname) = datastruct.(datafields{ii});
+    if isfield(namestruct,datafields{ii}) && isfield(datastruct,datafields{ii})
+        newname = namestruct.(datafields{ii});
+        outstruct.(newname) = datastruct.(datafields{ii});
+    else
+        continue
+    end
 end
 % datastructout = orderfields(datastructout);

@@ -1,4 +1,4 @@
-function plotsubfield(cellstruct, xfield, yfield, figh, linesty, axscale, xrng, yrng)
+function plotsubfield(cellstruct, xfield, yfield, figh, axscale, linesty, xrng, yrng)
 %plotsubfield(cellstruct, xfield, yfield, figh, linesty, axscale, xrng, yrng)
 %plot one subfield for each field in a struct. XFIELD and YFIELD must match to a
 %valid field for all substructs contined in CELLSTRUCT.
@@ -16,9 +16,9 @@ if nargin < 8
         xrng = [substructfun(@min,cellstruct,xfield),...
             substructfun(@max,cellstruct,xfield)];
         if nargin < 6
-            axscale = 'linear';
+            linesty = '.';
             if nargin < 5
-                linesty = '.';
+                axscale = 'linear';
                 if nargin < 3
                     yfield = 'fl3h';
                     if nargin < 2
@@ -62,8 +62,14 @@ for jj = 1:n
     subplot(m,ceil(n/m),jj); hold on;
     x = cellstruct.(celltypes{jj}).(xfield);
     y = cellstruct.(celltypes{jj}).(yfield);
-    z = sortrows([x(:),y(:)]);
-    plot(z(:,1),z(:,2),linesty)
+    [x,y] = downsampleplot(x,y,n);
+    if length(x) > 10
+        z = sortrows([x(:),y(:)]);
+    else
+        z = [x(:),y(:)];
+    end
+    plot(z(:,1),z(:,2),linesty,'MarkerSize',2)%,...
+        %'MarkerEdgeColor',0.5*[1,1,1],'MarkerFaceColor',0.5*[1,1,1])
     set(gca,'xscale',axscale);
     set(gca,'yscale',axscale);
     title(celltypes{jj})
@@ -96,3 +102,26 @@ for ii = 1:length(datafields)
 end
 
 output  = funhandle(cell2mat(temp));
+
+
+function [xnew,ynew] = downsampleplot(x,y,n)
+%[xnew,ynew] = downsampleplot(x,y,n)
+%downsample to make plots faster to create.
+%n is the number of plots to create
+
+maxptstot = 20000;
+m = length(x);
+
+%amount to downsample
+z = m/(maxptstot/n);
+
+if z < 1
+    %no downsampling necessary
+    xnew = x;
+    ynew = y;
+    return
+else
+    inds = round(1:z:m);
+    xnew = x(inds);
+    ynew = y(inds);
+end
