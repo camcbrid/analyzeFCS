@@ -6,7 +6,7 @@ expname = strrep(expname,' ','');
 if contains(expname,'3hrsrun1')
     %3 hrs
     fcsopts.time = '3 hrs';
-    fcsopts.datapath = 'D:\Research\Experimental\FCS\RS FCS 2018-08-02\CFlow-FCS Exports\20180810_1344283hrs_comp';
+    fcsopts.datapath = 'D:\Research\Experimental\FCS\RS FCS 2018-08-02\CFlow-FCS Exports\20180810_1344283hrs';
     fcsopts.platenames = struct(...
         'A01','G1', 'B01','G2', 'C01','G3',...
         'A02','R1', 'B02','R2', 'C02','R3',...
@@ -17,7 +17,7 @@ if contains(expname,'3hrsrun1')
 elseif contains(expname,'6hrsrun1')
     %experiment 6 hrs
     fcsopts.time = '6 hrs';
-    fcsopts.datapath = 'D:\Research\Experimental\FCS\RS FCS 2018-08-02\CFlow-FCS Exports\20180810_1342116hrs_comp';
+    fcsopts.datapath = 'D:\Research\Experimental\FCS\RS FCS 2018-08-02\CFlow-FCS Exports\20180810_1342116hrs';
     fcsopts.platenames = struct(...
         'A01','G1', 'B01','G2', 'C01','G3',...
         'A02','R1', 'B02','R2', 'C02','R3',...
@@ -34,7 +34,7 @@ elseif contains(expname,'washrun1')
 elseif contains(expname,'overnightrun1')
     %experiment 6 hrs
     fcsopts.time = '0 hrs';
-    fcsopts.datapath = 'D:\Research\Experimental\FCS\RS FCS 2018-08-02\CFlow-FCS Exports\20180810_133639overnight_comp';
+    fcsopts.datapath = 'D:\Research\Experimental\FCS\RS FCS 2018-08-02\CFlow-FCS Exports\20180810_133639overnight';
     fcsopts.platenames = struct(...
         'A01','G','A02','R','A03','Y',...
         'B01','GR','B02','GY','B03','RY');
@@ -50,5 +50,7 @@ elseif contains(expname,'exportfcs')
     fcsopts.datapath = 'D:\Research\Experimental\FCS\CFlow-FCS Exports_new\20180822_144220_export_fcs';
     fcsopts.platenames = struct;
 else
-    error('does not match valid experiment condition')
+    disp('select folder with experimental .fcs files')
+    fcsopts.datapath = uigetdir;
+    fcsopts.platenames = struct;
 end
